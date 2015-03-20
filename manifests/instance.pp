@@ -277,10 +277,7 @@ define wso2esb::instance (
 
     $shared_registry_data_source = "${upcase_env}_REG01_DB"
 
-    $user_manager_data_source = $tier ? {
-      'data' => "${upcase_env}_USERS_DB",
-      'corp' => "${upcase_env}_USERS_DB",
-    }
+    $user_manager_data_source = "${upcase_env}_USERS_DB"
 
     $enable_transports_in_axis2 = 'true'
 
