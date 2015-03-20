@@ -5,179 +5,179 @@ describe 'wso2esb::instance', :type => :define do
   # Test parameter validation
   #
   
-  context 'test failure message when rpm_version not supplied' do
-    let(:title) { 'wso2esb instances install' }
-    let(:params) { {:ensure => 'present',
-                    :wso2_version => '4.8.1',
-                    #:des_package_name => 'desesb-data-4.8.1_1.0.0',
-                    :des_root => '/opt/app/des',
-                    :tier => 'data',
-                    :subdomain => 'mgt',
-                    :server_name => 'desesb01m',
-                    :wso2_domain => 'desesb01.wso2.domain',
-                    :wso2_user => 'deslive',
-                    :wso2_group => 'des',
-                    :mgt_host => 'desesb01m-mgmt',
-                    :offset => '12',
-                    :hazelcast_port => '4020',
-                    :cluster_members => { 'desesb01m' => '4020' },
-                    :apache_user => 'apache',
-                    :apache_group => 'apache',
-                    :apache_port => '10800',
-                    :svn_username => 'svn',
-                    :svn_password => 'svnpass'
-                 } }
-    it do
-      expect {
-        should compile
-      }.to raise_error(Puppet::Error, /'des_package_name' must be defined/)
-    end
-  end
+  #context 'test failure message when rpm_version not supplied' do
+  #  let(:title) { 'wso2esb instances install' }
+  #  let(:params) { {:ensure => 'present',
+  #                  :wso2_version => '4.8.1',
+  #                  #:des_package_name => 'desesb-data-4.8.1_1.0.0',
+  #                  :des_root => '/opt/app/des',
+  #                  :tier => 'data',
+  #                  :subdomain => 'mgt',
+  #                  :server_name => 'desesb01m',
+  #                  :wso2_domain => 'desesb01.wso2.domain',
+  #                  :wso2_user => 'deslive',
+  #                  :wso2_group => 'des',
+  #                  :mgt_host => 'desesb01m-mgmt',
+  #                  :offset => '12',
+  #                  :hazelcast_port => '4020',
+  #                  :cluster_members => { 'desesb01m' => '4020' },
+  #                  :apache_user => 'apache',
+  #                  :apache_group => 'apache',
+  #                  :apache_port => '10800',
+  #                  :svn_username => 'svn',
+  #                  :svn_password => 'svnpass'
+  #               } }
+  #  it do
+  #    expect {
+  #      should compile
+  #    }.to raise_error(Puppet::Error, /'des_package_name' must be defined/)
+  #  end
+  #end
 
-   context 'test failure message when tier not supplied' do
-    let(:title) { 'wso2esb instances install' }
-    let(:params) { {:ensure => 'present',
-                    :wso2_version => '4.8.1',
-                    :des_package_name => 'desesb-data-4.8.1_1.0.0',
-                    :des_root => '/opt/app/des',
-                    #:tier => 'data',
-                    :subdomain => 'mgt',
-                    :server_name => 'desesb01m',
-                    :wso2_domain => 'desesb01.wso2.domain',
-                    :wso2_user => 'deslive',
-                    :wso2_group => 'des',
-                    :mgt_host => 'desesb01m-mgmt',
-                    :offset => '12',
-                    :hazelcast_port => '4020',
-                    :cluster_members => { 'desesb01m' => '4020' },
-                    :apache_user => 'apache',
-                    :apache_group => 'apache',
-                    :apache_port => '10800',
-                    :svn_username => 'svn',
-                    :svn_password => 'svnpass'
-                 } }
-    it do
-      expect {
-        should compile
-      }.to raise_error(Puppet::Error, /'tier' not defined or not in /)
-    end
-  end 
+  #context 'test failure message when tier not supplied' do
+  # let(:title) { 'wso2esb instances install' }
+  # let(:params) { {:ensure => 'present',
+  #                 :wso2_version => '4.8.1',
+  #                 :des_package_name => 'desesb-data-4.8.1_1.0.0',
+  #                 :des_root => '/opt/app/des',
+  #                 #:tier => 'data',
+  #                 :subdomain => 'mgt',
+  #                 :server_name => 'desesb01m',
+  #                 :wso2_domain => 'desesb01.wso2.domain',
+  #                 :wso2_user => 'deslive',
+  #                 :wso2_group => 'des',
+  #                 :mgt_host => 'desesb01m-mgmt',
+  #                 :offset => '12',
+  #                 :hazelcast_port => '4020',
+  #                 :cluster_members => { 'desesb01m' => '4020' },
+  #                 :apache_user => 'apache',
+  #                 :apache_group => 'apache',
+  #                 :apache_port => '10800',
+  #                 :svn_username => 'svn',
+  #                 :svn_password => 'svnpass'
+  #              } }
+  # it do
+  #   expect {
+  #     should compile
+  #   }.to raise_error(Puppet::Error, /'tier' not defined or not in /)
+  # end
+  #end 
   
-   context 'test failure message when tier not correct value' do
-    let(:title) { 'wso2esb instances install' }
-    let(:params) { {:ensure => 'present',
-                    :wso2_version => '4.8.1',
-                    :des_package_name => 'desesb-data-4.8.1_1.0.0',
-                    :des_root => '/opt/app/des',
-                    :tier => 'wibble',
-                    :subdomain => 'mgt',
-                    :server_name => 'desesb01m',
-                    :wso2_domain => 'desesb01.wso2.domain',
-                    :wso2_user => 'deslive',
-                    :wso2_group => 'des',
-                    :mgt_host => 'desesb01m-mgmt',
-                    :offset => '12',
-                    :hazelcast_port => '4020',
-                    :cluster_members => { 'desesb01m' => '4020' },
-                    :apache_user => 'apache',
-                    :apache_group => 'apache',
-                    :apache_port => '10800',
-                    :svn_username => 'svn',
-                    :svn_password => 'svnpass'
-                 } }
-    it do
-      expect {
-        should compile
-      }.to raise_error(Puppet::Error, /'tier' not defined or not in /)
-    end
-  end 
+  #context 'test failure message when tier not correct value' do
+  #  let(:title) { 'wso2esb instances install' }
+  #  let(:params) { {:ensure => 'present',
+  #                  :wso2_version => '4.8.1',
+  #                  :des_package_name => 'desesb-data-4.8.1_1.0.0',
+  #                  :des_root => '/opt/app/des',
+  #                  :tier => 'wibble',
+  #                  :subdomain => 'mgt',
+  #                  :server_name => 'desesb01m',
+  #                  :wso2_domain => 'desesb01.wso2.domain',
+  #                  :wso2_user => 'deslive',
+  #                  :wso2_group => 'des',
+  #                  :mgt_host => 'desesb01m-mgmt',
+  #                  :offset => '12',
+  #                  :hazelcast_port => '4020',
+  #                  :cluster_members => { 'desesb01m' => '4020' },
+  #                  :apache_user => 'apache',
+  #                  :apache_group => 'apache',
+  #                  :apache_port => '10800',
+  #                  :svn_username => 'svn',
+  #                  :svn_password => 'svnpass'
+  #               } }
+  #  it do
+  #    expect {
+  #      should compile
+  #    }.to raise_error(Puppet::Error, /'tier' not defined or not in /)
+  #  end
+  #end 
 
-   context 'test failure message when subdomain not supplied' do
-    let(:title) { 'wso2esb instances install' }
-    let(:params) { {:ensure => 'present',
-                    :wso2_version => '4.8.1',
-                    :des_package_name => 'desesb-data-4.8.1_1.0.0',
-                    :des_root => '/opt/app/des',
-                    :tier => 'data',
-                    #:subdomain => 'mgt',
-                    :server_name => 'desesb01m',
-                    :wso2_domain => 'desesb01.wso2.domain',
-                    :wso2_user => 'deslive',
-                    :wso2_group => 'des',
-                    :mgt_host => 'desesb01m-mgmt',
-                    :offset => '12',
-                    :hazelcast_port => '4020',
-                    :cluster_members => { 'desesb01m' => '4020' },
-                    :apache_user => 'apache',
-                    :apache_group => 'apache',
-                    :apache_port => '10800',
-                    :svn_username => 'svn',
-                    :svn_password => 'svnpass'
-                 } }
-    it do
-      expect {
-        should compile
-      }.to raise_error(Puppet::Error, /'subdomain' not defined or not in /)
-    end
-  end 
+  #context 'test failure message when subdomain not supplied' do
+  #  let(:title) { 'wso2esb instances install' }
+  #  let(:params) { {:ensure => 'present',
+  #                  :wso2_version => '4.8.1',
+  #                  :des_package_name => 'desesb-data-4.8.1_1.0.0',
+  #                  :des_root => '/opt/app/des',
+  #                  :tier => 'data',
+  #                  #:subdomain => 'mgt',
+  #                  :server_name => 'desesb01m',
+  #                  :wso2_domain => 'desesb01.wso2.domain',
+  #                  :wso2_user => 'deslive',
+  #                  :wso2_group => 'des',
+  #                  :mgt_host => 'desesb01m-mgmt',
+  #                  :offset => '12',
+  #                  :hazelcast_port => '4020',
+  #                  :cluster_members => { 'desesb01m' => '4020' },
+  #                  :apache_user => 'apache',
+  #                  :apache_group => 'apache',
+  #                  :apache_port => '10800',
+  #                  :svn_username => 'svn',
+  #                  :svn_password => 'svnpass'
+  #               } }
+  #  it do
+  #    expect {
+  #      should compile
+  #    }.to raise_error(Puppet::Error, /'subdomain' not defined or not in /)
+  #  end
+  #end 
   
-   context 'test failure message when subdomain not correct value' do
-    let(:title) { 'wso2esb instances install' }
-    let(:params) { {:ensure => 'present',
-                    :wso2_version => '4.8.1',
-                    :des_package_name => 'desesb-data-4.8.1_1.0.0',
-                    :des_root => '/opt/app/des',
-                    :tier => 'data',
-                    :subdomain => 'wibble',
-                    :server_name => 'desesb01m',
-                    :wso2_domain => 'desesb01.wso2.domain',
-                    :wso2_user => 'deslive',
-                    :wso2_group => 'des',
-                    :mgt_host => 'desesb01m-mgmt',
-                    :offset => '12',
-                    :hazelcast_port => '4020',
-                    :cluster_members => { 'desesb01m' => '4020' },
-                    :apache_user => 'apache',
-                    :apache_group => 'apache',
-                    :apache_port => '10800',
-                    :svn_username => 'svn',
-                    :svn_password => 'svnpass'
-                 } }
-    it do
-      expect {
-        should compile
-      }.to raise_error(Puppet::Error, /'subdomain' not defined or not in /)
-    end
-  end   
+  #context 'test failure message when subdomain not correct value' do
+  #  let(:title) { 'wso2esb instances install' }
+  #  let(:params) { {:ensure => 'present',
+  #                  :wso2_version => '4.8.1',
+  #                  :des_package_name => 'desesb-data-4.8.1_1.0.0',
+  #                  :des_root => '/opt/app/des',
+  #                  :tier => 'data',
+  #                  :subdomain => 'wibble',
+  #                  :server_name => 'desesb01m',
+  #                  :wso2_domain => 'desesb01.wso2.domain',
+  #                  :wso2_user => 'deslive',
+  #                  :wso2_group => 'des',
+  #                  :mgt_host => 'desesb01m-mgmt',
+  #                  :offset => '12',
+  #                  :hazelcast_port => '4020',
+  #                  :cluster_members => { 'desesb01m' => '4020' },
+  #                  :apache_user => 'apache',
+  #                  :apache_group => 'apache',
+  #                  :apache_port => '10800',
+  #                  :svn_username => 'svn',
+  #                  :svn_password => 'svnpass'
+  #               } }
+  #  it do
+  #    expect {
+  #      should compile
+  #    }.to raise_error(Puppet::Error, /'subdomain' not defined or not in /)
+  #  end
+  #end   
 
-   context 'test failure message when server_name not supplied' do
-    let(:title) { 'wso2esb instances install' }
-    let(:params) { {:ensure => 'present',
-                    :wso2_version => '4.8.1',
-                    :des_package_name => 'desesb-data-4.8.1_1.0.0',
-                    :des_root => '/opt/app/des',
-                    :tier => 'data',
-                    :subdomain => 'mgt',
-                    #:server_name => 'desesb01m',
-                    :wso2_domain => 'desesb01.wso2.domain',
-                    :wso2_user => 'deslive',
-                    :wso2_group => 'des',
-                    :mgt_host => 'desesb01m-mgmt',
-                    :offset => '12',
-                    :hazelcast_port => '4020',
-                    :cluster_members => { 'desesb01m' => '4020' },
-                    :apache_user => 'apache',
-                    :apache_group => 'apache',
-                    :apache_port => '10800',
-                    :svn_username => 'svn',
-                    :svn_password => 'svnpass'
-                 } }
-    it do
-      expect {
-        should compile
-      }.to raise_error(Puppet::Error, /'server_name' must be defined/)
-    end
-  end 
+  #context 'test failure message when server_name not supplied' do
+  #  let(:title) { 'wso2esb instances install' }
+  #  let(:params) { {:ensure => 'present',
+  #                  :wso2_version => '4.8.1',
+  #                  :des_package_name => 'desesb-data-4.8.1_1.0.0',
+  #                  :des_root => '/opt/app/des',
+  #                  :tier => 'data',
+  #                  :subdomain => 'mgt',
+  #                  #:server_name => 'desesb01m',
+  #                  :wso2_domain => 'desesb01.wso2.domain',
+  #                  :wso2_user => 'deslive',
+  #                  :wso2_group => 'des',
+  #                  :mgt_host => 'desesb01m-mgmt',
+  #                  :offset => '12',
+  #                  :hazelcast_port => '4020',
+  #                  :cluster_members => { 'desesb01m' => '4020' },
+  #                  :apache_user => 'apache',
+  #                  :apache_group => 'apache',
+  #                  :apache_port => '10800',
+  #                  :svn_username => 'svn',
+  #                  :svn_password => 'svnpass'
+  #               } }
+  #  it do
+  #    expect {
+  #      should compile
+  #    }.to raise_error(Puppet::Error, /'server_name' must be defined/)
+  #  end
+  #end 
 
   #
   # Test package installation and SVN setup
