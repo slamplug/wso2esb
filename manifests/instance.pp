@@ -149,8 +149,8 @@ define wso2esb::instance (
                                 default => '' },
   $rabbitmq_password        = undef,
   $ensure_service           = 'running',
-  $db_type                  = $env ? { 'des-dev' => 'h2', 
-                                /cit./ => 'mysql', default => 'oracle' }
+  $db_type                  = 'mysql'
+
 )  {
 
   include stdlib
@@ -170,10 +170,7 @@ define wso2esb::instance (
   }
 
   # calculate the directory into which the product will be installed
-  $product_root = $env ? {
-    /cit./  => "${des_root}/${env}/${server_name}",
-    default => "${des_root}/${server_name}",
-  }
+  $product_root = "${des_root}/${env}/${server_name}"
 
   # calculate some variables
   $package_url         = "http://repomirror/Capgemini/Packages/${des_package_name}.rpm"
@@ -276,35 +273,16 @@ define wso2esb::instance (
       undef => calc_cluster_members($tier, $subdomain),
       default => $cluster_members
     }
-    $wso2_registry_data_source = $env ? {
-      /des-dev/ => 'WSO2CarbonDB',
-      /cit./  => 'WSO2CarbonDB',
-      default => $tier ? { 
-       'data' => $subdomain ? { 'mgt' => 'WSO2CarbonDB', default => 'WSO2_SHARED_DB' }, 
-       'corp' => 'WSO2CarbonDB' 
-      }
-    }
-    $shared_registry_data_source = $env ? {
-      /des-dev/ => 'WSO2CarbonDB',
-      /cit./  => "${upcase_env}_REG01_DB",
-      default => 'WSO2GREG_DB'
-    }
+    $wso2_registry_data_source = 'WSO2CarbonDB'
+
+    $shared_registry_data_source = "${upcase_env}_REG01_DB"
+
     $user_manager_data_source = $tier ? {
-      'data' => $env ? {
-        /des-dev/ => 'WSO2CarbonDB',
-        /cit./  => "${upcase_env}_USERS_DB", 
-        default => 'WSO2_SHARED_DB'
-      },
-      'corp' => $env ? {
-        /des-dev/ => 'WSO2CarbonDB',
-        /cit./  => "${upcase_env}_USERS_DB",
-        default => 'WSO2UM_DB'
-      },
+      'data' => "${upcase_env}_USERS_DB",
+      'corp' => "${upcase_env}_USERS_DB",
     }
-    $enable_transports_in_axis2 = $env ? {
-      /cit./  => 'true',
-      default => $subdomain ? { 'mgt' => 'false', default => 'true' }
-    }
+
+    $enable_transports_in_axis2 = 'true'
 
     # Apply configuration
   

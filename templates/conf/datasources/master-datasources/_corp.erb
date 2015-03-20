@@ -1,87 +1,140 @@
 <datasource>
-            <name>WSO2UM_DB</name>
-            <description>The datasource used for User Management database</description>
-            <jndiConfig>
-                <name>jdbc/WSO2UM_DB</name>
-            </jndiConfig>
-            <definition type="RDBMS">
-                <configuration>
-                    <url>jdbc:oracle:thin:@10.102.157.90:1521/des_intds.isit0</url>
-                    <username>desesb_app</username>
-                    <password>appuser</password>
-                    <driverClassName>oracle.jdbc.driver.OracleDriver</driverClassName>
-                    <maxActive>50</maxActive>
-                    <maxWait>60000</maxWait>
-                    <minIdle>5</minIdle>
-                    <testOnBorrow>true</testOnBorrow>
-                    <validationQuery>SELECT 1 FROM DUAL</validationQuery>
-                    <validationInterval>30000</validationInterval>
-                </configuration>
-            </definition>
-        </datasource>
-        <datasource>
-            <name>WSO2GREG_DB</name>
-            <description>The datasource used for Governance Registry database</description>
-            <jndiConfig>
-                <name>jdbc/WSO2GREG_DB</name>
-            </jndiConfig>
-            <definition type="RDBMS">
-                <configuration>
-                    <url>jdbc:oracle:thin:@10.102.157.90:1521/des_intds.isit0</url>
-                    <username>desreg_app</username>
-                    <password>appuser</password>
-                    <driverClassName>oracle.jdbc.driver.OracleDriver</driverClassName>
-                    <maxActive>50</maxActive>
-                    <maxWait>60000</maxWait>
-                    <minIdle>5</minIdle>
-                    <testOnBorrow>true</testOnBorrow>
-                    <validationQuery>SELECT 1 FROM DUAL</validationQuery>
-                    <validationInterval>30000</validationInterval>
-                </configuration>
-            </definition>
-        </datasource>
-        <datasource>
             <name>WSO2AM_DB</name>
-            <description>The datasource used for API Manager database</description>
+            <description>The datasource used for APM02 cluster CORP Tier</description>
             <jndiConfig>
                 <name>jdbc/WSO2AM_DB</name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:oracle:thin:@10.102.157.90:1521/des_intds.isit0</url>
-                    <username>desapm_app</username>
-                    <password>appuser</password>
-                    <defaultAutoCommit>false</defaultAutoCommit>
-                    <driverClassName>oracle.jdbc.driver.OracleDriver</driverClassName>
-                    <maxActive>50</maxActive>
+                    <url>jdbc:mysql://wso2-des-db:3306/desapm02_<%= @mysql_prod_id_lc %></url>
+                    <username>admin</username>
+                    <password>admin</password>
+                    <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                    <maxActive>80</maxActive>
                     <maxWait>60000</maxWait>
-                    <minIdle>5</minIdle>
                     <testOnBorrow>true</testOnBorrow>
                     <validationQuery>SELECT 1 FROM DUAL</validationQuery>
                     <validationInterval>30000</validationInterval>
                 </configuration>
             </definition>
         </datasource>
-         <!-- Not sure if we need this Datasource for Live Service statistics dashboard
-         <datasource>
-            <name>WSO2AM_STATS_DB</name>
-            <description>The datasource used for getting statistics to API Manager</description>
+        <datasource>
+            <name><%= @mysql_prod_id_uc %>_APM02_DB</name>
+            <description>The datasource used for APM02 cluster CORP Tier</description>
             <jndiConfig>
-                <name>jdbc/WSO2AM_STATS_DB</name>
+                <name>jdbc/<%= @mysql_prod_id_uc %>_APM02_DB</name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:h2:Full path to JDBC database ;AUTO_SERVER=TRUE</url>
-                    <username>wso2carbon</username>
-                    <password>wso2carbon</password>
-                    <defaultAutoCommit>false</defaultAutoCommit>
-                    <driverClassName>org.h2.Driver</driverClassName>
-                    <maxActive>50</maxActive>
+                    <url>jdbc:mysql://wso2-des-db:3306/desapm02_<%= @mysql_prod_id_lc %></url>
+                    <username>admin</username>
+                    <password>admin</password>
+                    <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                    <maxActive>80</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
-                    <validationQuery>SELECT 1</validationQuery>
+                    <validationQuery>SELECT 1 FROM DUAL</validationQuery>
                     <validationInterval>30000</validationInterval>
                 </configuration>
             </definition>
-         </datasource>
-         -->
+        </datasource>
+        <datasource>
+            <name><%= @mysql_prod_id_uc %>_REG01_DB</name>
+            <description>The datasource used for Gov.Reg. Corp Tier</description>
+            <jndiConfig>
+                <name>jdbc/<%= @mysql_prod_id_uc %>_REG01_DB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:mysql://wso2-des-db:3306/desreg01_<%= @mysql_prod_id_lc %></url>
+                    <username>admin</username>
+                    <password>admin</password>
+                    <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                    <maxActive>80</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1 FROM DUAL</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+        <datasource>
+            <name><%= @mysql_prod_id_uc %>_ESB01_DB</name>
+            <description>The datasource used for ESB01 cluster Data Tier</description>
+            <jndiConfig>
+                <name>jdbc/<%= @mysql_prod_id_uc %>_ESB01_DB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:mysql://wso2-des-db:3306/desesb01_<%= @mysql_prod_id_lc %></url>
+                    <username>admin</username>
+                    <password>admin</password>
+                    <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                    <maxActive>80</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1 FROM DUAL</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+        <datasource>
+            <name><%= @mysql_prod_id_uc %>_ESB02_DB</name>
+            <description>The datasource used for ESB02 cluster Corp. Tier</description>
+            <jndiConfig>
+                <name>jdbc/<%= @mysql_prod_id_uc %>_ESB02_DB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:mysql://wso2-des-db:3306/desesb02_<%= @mysql_prod_id_lc %></url>
+                    <username>admin</username>
+                    <password>admin</password>
+                    <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                    <maxActive>80</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1 FROM DUAL</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+        <datasource>
+            <name><%= @mysql_prod_id_uc %>_DSS01_DB</name>
+            <description>The datasource used for DSS01 cluster CORP Tier</description>
+            <jndiConfig>
+                <name>jdbc/<%= @mysql_prod_id_uc %>_DSS01_DB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:mysql://wso2-des-db:3306/desdss01_<%= @mysql_prod_id_lc %></url>
+                    <username>admin</username>
+                    <password>admin</password>
+                    <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                    <maxActive>80</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1 FROM DUAL</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+        <datasource>
+            <name><%= @mysql_prod_id_uc %>_USERS_DB</name>
+            <description>The datasource used for User Management off all <%= @mysql_prod_id_uc %></description>
+            <jndiConfig>
+                <name>jdbc/<%= @mysql_prod_id_uc %>_USERS_DB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:mysql://wso2-des-db:3306/desusers_<%= @mysql_prod_id_lc %></url>
+                    <username>admin</username>
+                    <password>admin</password>
+                    <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+                    <maxActive>80</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1 FROM DUAL</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>

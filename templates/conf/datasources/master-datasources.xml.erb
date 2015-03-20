@@ -27,24 +27,10 @@
             </definition>
         </datasource>
 
-        <% if @db_type =~ /h2/ %>
-          <% if @tier == 'corp' %>
-            <%= scope.function_template(['wso2esb/conf/datasources/master-datasources/h2/_corp.erb']) %>
-          <% else %>
-            <%= scope.function_template(['wso2esb/conf/datasources/master-datasources/h2/_data.erb']) %>
-          <% end %>
-        <% elsif @db_type =~ /mysql/%>
-          <% if @tier == 'corp' %>
-            <%= scope.function_template(['wso2esb/conf/datasources/master-datasources/mysql/_corp.erb']) %>
-          <% else %>
-            <%= scope.function_template(['wso2esb/conf/datasources/master-datasources/mysql/_data.erb']) %>
-          <% end %>
+        <% if @tier == 'corp' %>
+          <%= scope.function_template(['wso2esb/conf/datasources/master-datasources/_corp.erb']) %>
         <% else %>
-          <% if @tier == 'corp' %>
-            <%= scope.function_template(['wso2esb/conf/datasources/master-datasources/_corp.erb']) %>
-          <% else %>
-            <%= scope.function_template(['wso2esb/conf/datasources/master-datasources/_data.erb']) %>
-          <% end %>
+          <%= scope.function_template(['wso2esb/conf/datasources/master-datasources/_data.erb']) %>
         <% end %>
 
         <!-- For an explanation of the properties, see: http://people.apache.org/~fhanik/jdbc-pool/jdbc-pool.html -->
