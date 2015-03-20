@@ -15,24 +15,10 @@
         <dataSource>jdbc/<%= @wso2_registry_data_source %></dataSource>
     </dbConfig>
 
-    <% if @db_type =~ /h2/ %>
-      <% if @tier == 'corp' %>
-        <%= scope.function_template(['wso2esb/conf/registry/h2/_corp.erb']) %>
-      <% else %>
-        <%= scope.function_template(['wso2esb/conf/registry/h2/_data.erb']) %>
-      <% end %>
-    <% elsif @db_type =~ /mysql/%>
-      <% if @tier == 'corp' %>
-        <%= scope.function_template(['wso2esb/conf/registry/mysql/_corp.erb']) %>
-      <% else %>
-        <%= scope.function_template(['wso2esb/conf/registry/mysql/_data.erb']) %>
-      <% end %>
+    <% if @tier == 'corp' %>
+      <%= scope.function_template(['wso2esb/conf/registry/_corp.erb']) %>
     <% else %>
-      <% if @tier == 'corp' %>
-        <%= scope.function_template(['wso2esb/conf/registry/_corp.erb']) %>
-      <% else %>
-        <%= scope.function_template(['wso2esb/conf/registry/_data.erb']) %>
-      <% end %>
+      <%= scope.function_template(['wso2esb/conf/registry/_data.erb']) %>
     <% end %>
 
    <!--<handler class="org.wso2.carbon.registry.extensions.handlers.SynapseRepositoryHandler">

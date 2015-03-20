@@ -149,8 +149,8 @@ define wso2esb::instance (
                                 default => '' },
   $rabbitmq_password        = undef,
   $ensure_service           = 'running',
-  $db_type                  = $env ? { 'des-dev' => 'h2', 
-                                /cit./ => 'mysql', default => 'oracle' }
+  $db_type                  = 'h2'
+
 )  {
 
   include stdlib
@@ -170,10 +170,7 @@ define wso2esb::instance (
   }
 
   # calculate the directory into which the product will be installed
-  $product_root = $env ? {
-    /cit./  => "${des_root}/${env}/${server_name}",
-    default => "${des_root}/${server_name}",
-  }
+  $product_root = "${des_root}/${server_name}"
 
   # calculate some variables
   $package_url         = "http://repomirror/Capgemini/Packages/${des_package_name}.rpm"
@@ -189,10 +186,6 @@ define wso2esb::instance (
   $p_svn_password      = $deployment_synch_enabled ? { true => $svn_password, default => 'password', }
   $logs_directory      = "/var/log/des/${server_name}"
   $clustering_enabled  = $deployment_synch_enabled
-  
-  # database name extensions for mysql db's
-  $mysql_prod_id_lc    = regsubst($env, '-', '_')
-  $mysql_prod_id_uc    = upcase($mysql_prod_id_lc)
 
   # Check whether this is to make present or absence because of the sequence
   if $ensure == 'present' {
@@ -276,35 +269,13 @@ define wso2esb::instance (
       undef => calc_cluster_members($tier, $subdomain),
       default => $cluster_members
     }
-    $wso2_registry_data_source = $env ? {
-      /des-dev/ => 'WSO2CarbonDB',
-      /cit./  => 'WSO2CarbonDB',
-      default => $tier ? { 
-       'data' => $subdomain ? { 'mgt' => 'WSO2CarbonDB', default => 'WSO2_SHARED_DB' }, 
-       'corp' => 'WSO2CarbonDB' 
-      }
-    }
-    $shared_registry_data_source = $env ? {
-      /des-dev/ => 'WSO2CarbonDB',
-      /cit./  => "${upcase_env}_REG01_DB",
-      default => 'WSO2GREG_DB'
-    }
-    $user_manager_data_source = $tier ? {
-      'data' => $env ? {
-        /des-dev/ => 'WSO2CarbonDB',
-        /cit./  => "${upcase_env}_USERS_DB", 
-        default => 'WSO2_SHARED_DB'
-      },
-      'corp' => $env ? {
-        /des-dev/ => 'WSO2CarbonDB',
-        /cit./  => "${upcase_env}_USERS_DB",
-        default => 'WSO2UM_DB'
-      },
-    }
-    $enable_transports_in_axis2 = $env ? {
-      /cit./  => 'true',
-      default => $subdomain ? { 'mgt' => 'false', default => 'true' }
-    }
+    $wso2_registry_data_source = 'WSO2CarbonDB'
+
+    $shared_registry_data_source = 'WSO2CarbonDB'
+
+    $user_manager_data_source = 'WSO2CarbonDB'
+
+    $enable_transports_in_axis2 = 'true'
 
     # Apply configuration
   
